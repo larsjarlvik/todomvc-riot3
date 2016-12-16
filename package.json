@@ -9,16 +9,16 @@
   "author": "Lars Jarlvik",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
     "babel-preset-es2015": "^6.18.0",
-    "riot-compiler": "^3.1.1",
+    "babel-preset-es2015-native-modules": "^6.9.4",
     "riotjs-loader": "^3.0.0",
-    "webpack": "^1.14.0"
+    "webpack": "^2.2.0-rc.0"
   },
   "dependencies": {
-    "riot": "^3.0.2",
+    "redux": "^3.6.0",
+    "riot": "^3.0.4",
     "riot-route": "^3.0.2",
     "todomvc-app-css": "^2.0.6",
     "todomvc-common": "^1.0.3"
