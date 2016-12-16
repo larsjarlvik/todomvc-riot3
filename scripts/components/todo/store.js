@@ -16,6 +16,8 @@ const reducer = (state, action) => {
             return toggleCompleted(state, action.todo);
         case 'toggleAllCompleted':
             return toggleAllCompleted(state);
+        case 'removeCompleted':
+            return removeCompleted(state);
         case 'remove':
             return remove(state, action.todo);
         case 'filter':
@@ -46,21 +48,21 @@ function edit(state, todo, newTitle) {
     if(!newTitle || !newTitle.trim())
         return remove(state, todo);
 
-    const fTodos = state.todos.map((t) => {
+    const ntodos = state.todos.map((t) => {
         if(t === todo) { t.title = newTitle; }
         return t;
     });
 
-    return { todos: store(fTodos), remaining: getRemaining(fTodos) };
+    return { todos: store(ntodos), remaining: getRemaining(ntodos) };
 }
 
 function toggleCompleted(state, todo) {
-    const fTodos = state.todos.map((t) => {
+    const ntodos = state.todos.map((t) => {
         if(t === todo) { t.completed = !todo.completed; }
         return t;
     });
 
-    return { todos: store(fTodos), remaining: getRemaining(fTodos) };
+    return { todos: store(ntodos), remaining: getRemaining(ntodos) };
 }
 
 function toggleAllCompleted(state) {
@@ -70,17 +72,22 @@ function toggleAllCompleted(state) {
     if(remaining === 0)
         setCompleted = false;
 
-    const fTodos = state.todos.map((t) => {
+    const ntodos = state.todos.map((t) => {
         t.completed = setCompleted;
         return t;
     });
 
-    return { todos: store(fTodos), remaining: getRemaining(fTodos) };
+    return { todos: store(ntodos), remaining: getRemaining(ntodos) };
+}
+
+function removeCompleted(state) {
+    const ntodos = state.todos.filter((t) => t.completed === false);
+    return { todos: store(ntodos), remaining: getRemaining(ntodos) };
 }
 
 function remove(state, todo) {
-    const fTodos = state.todos.filter((t) => t !== todo);
-    return { todos: store(fTodos), remaining: getRemaining(fTodos) };
+    const ntodos = state.todos.filter((t) => t !== todo);
+    return { todos: store(ntodos), remaining: getRemaining(ntodos) };
 }
 
 function filter(state, activeFilter) {

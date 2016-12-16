@@ -1,4 +1,5 @@
 <tmr-todo>
+
     <form onsubmit={addTodo}>
         <input ref="todotitle" class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?">
     </form>
@@ -50,17 +51,16 @@
             return true;
         }
 
-        this.removeTodo = (todo) =>         store.dispatch({ type: 'remove', todo });
+        this.removeTodo = (todo) => store.dispatch({ type: 'remove', todo });
         this.editTodo = (todo, newTitle) => store.dispatch({ type: 'edit', todo, newTitle });
-        this.toggleCompleted = (todo) =>    store.dispatch({ type: 'toggleCompleted', todo });
-        this.toggleallCompleted = () =>     store.dispatch({ type: 'toggleAllCompleted' });
+        this.toggleCompleted = (todo) => store.dispatch({ type: 'toggleCompleted', todo });
+        this.toggleallCompleted = () => store.dispatch({ type: 'toggleAllCompleted' });
+        this.removeCompleted = () => store.dispatch({ type: 'removeCompleted' });
 
         this.stateChange = () => {
             this.state = store.getState();
-
-            if(this.isMounted) {
+            if(this.isMounted)
                 this.refs.toggleall.checked = this.state.remaining === 0;
-            }
 
             this.update();
         };
